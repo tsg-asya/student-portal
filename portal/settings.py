@@ -128,7 +128,7 @@ USE_TZ = True
 AUTH_USER_MODEL = 'authy.User'
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = "/auth/login"
+LOGIN_URL = "/accounts/login"
 LOGOUT_REDIRECT_URL = "/"
 
 # Static files (CSS, JavaScript, Images)

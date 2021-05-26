@@ -13,10 +13,11 @@ class User(AbstractUser):
         return self.username
 
 
-class UserProfile(models.Model):
+class Student(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
-    contact = models.CharField(max_length=20, blank=True, default='')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student')
+    enrollment_no = models.CharField(max_length=25, blank=True)
+    contact = models.CharField(max_length=20, default='')
     city = models.CharField(max_length=15, blank=True)
     country = models.CharField(max_length=15, blank=True)
     guardian_name = models.CharField(max_length=20, blank=True)
@@ -29,10 +30,10 @@ class UserProfile(models.Model):
 
 # signals
 
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def create_or_update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Student.objects.create(user=instance)
+#     instance.student.save()
 
 # post_save.connect(create_or_update_user_profile, sender=User)

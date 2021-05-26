@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% block content %}
+<div class="max-w-lg mx-auto">
+    <h2 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Sign up as a {{ user_type }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Sign Up</button>
+
+    </form>
+    <div class="flex py-5 border-t border-gray-200 mt-5 justify-between">
+        <a class="hover:text-yellow-500 mt-3" href="#">Forgot Password?</a>
+    </div>
+</div>
+{% endblock content %}
