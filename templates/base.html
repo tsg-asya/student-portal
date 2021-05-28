@@ -13,11 +13,11 @@
 <style>
 </style>
 <body>
-    <div class="max-w-7xl mx-auto">
+    {% if not user.is_authenticated %}
         {% include 'navbar.html' %}
+    {% endif %}
         {% block content %}
         {% endblock content %}
-    </div>
 
 </body>
 </html>
