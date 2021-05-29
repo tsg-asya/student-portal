@@ -1,34 +1,41 @@
-{% load static %}
+    <!-- mobile menu bar -->
+    <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+      <!-- logo -->
+      <a href="#" class="block p-4 text-white font-bold"> IITD Portal</a>
 
-<header class="text-gray-600 body-font">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a class="flex title-font font-medium items-center text-gray-900 mb-4 ml-10 md:mb-0">
-      <a href="/"><span class="ml text-xl text-black-400">Student Portal</span></a>
-    </a>
-    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      {% if request.user.is_authenticated %}
-        <a href="#" class="mr-5 text-black-500 hover:text-yellow-600">Courses</a>
-        <a href="#" class="mr-5 text-black-500 hover:text-yellow-600">My Courses</a>
-        <a href="#" class="mr-5 text-black-500 hover:text-yellow-600">Profile</a>
-        <a href="#" class="mr-5 text-black-500 hover:text-yellow-600">Inbox</a>
-      {% endif %}
-    </nav>
-
-    {% if request.user.is_authenticated %}
-      Logged in as: {{ request.user.username }}
-      <a href="#" class="ml-3 inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Logout
-        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
+      <!-- mobile menu button -->
+      <button class="mobile-menu-button p-4 focus:outline-none focus:bg-gray-700">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
+      </button>
+    </div>
+
+    <!-- sidebar -->
+    <div class="sidebar bg-blue-800 text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+
+      <!-- logo -->
+      <a href="#" class="text-white flex items-center space-x-2 px-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+          </svg>
+        <span class="text-2xl font-extrabold">IITD Portal</span>
       </a>
-    {% else %}
-    <a href="{% url 'signup' %}" class="inline-flex items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-white mt-4 md:mt-0 mr-4">Sign Up
-    </a>
-    <a href="{% url 'login' %}" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Login
-      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-        <path d="M5 12h14M12 5l7 7-7 7"></path>
-      </svg>
-    </a>
-    {% endif  %}
-  </div>
-</header>
+
+      <!-- nav -->
+      <nav>
+        <a href="{% url 'student_detail' user.student.slug %}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+          Home
+        </a>
+        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+          Course Catalog
+        </a>
+        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+          My Courses
+        </a>
+        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+          Profile
+        </a>
+      </nav>
+    </div>
+

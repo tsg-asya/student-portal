@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     # third party
     'crispy_forms',
     'crispy_tailwind',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -142,8 +144,13 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = "static_root"
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# 3rd party apps:
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # for production
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

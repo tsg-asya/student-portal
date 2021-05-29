@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+import os
 
 
 class User(AbstractUser):
@@ -13,19 +14,40 @@ class User(AbstractUser):
         return self.username
 
 
+def user_directory_path(instance, filename):
+    profile_pic_name = 'user_{0}/profile.jpg'.format(instance.user.id)
+    full_path = os.path.join(settings.MEDIA_ROOT, profile_pic_name)
+
+    if os.path.exists(full_path):
+        os.remove(full_path)
+    return profile_pic_name
+
+
+GENDER = (
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+    ('Other', 'Other')
+)
+
+
 class Student(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student')
+    gender = models.CharField(
+        ('Gender'), choices=GENDER, max_length=7, default=GENDER[0][0])
+    slug = models.SlugField(primary_key=True, null=False)
     enrollment_no = models.CharField(max_length=25, blank=True)
     contact = models.CharField(max_length=20, default='')
-    city = models.CharField(max_length=15, blank=True)
-    country = models.CharField(max_length=15, blank=True)
+    local_address = models.CharField(max_length=15, blank=True)
+    city_state = models.CharField(max_length=15, blank=True)
     guardian_name = models.CharField(max_length=20, blank=True)
     guardian_contact_no = models.CharField(max_length=20, blank=True)
     birthdate = models.DateField(null=True, blank=True)
+    picture = models.ImageField(
+        upload_to=user_directory_path, blank=True, null=True)
 
     def __str__(self):  # __unicode__ for Python 2
-        return self.user.username
+        return self.user.username + '-' + self.enrollment_no
 
 
 # signals

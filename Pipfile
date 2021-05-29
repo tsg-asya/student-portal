@@ -8,6 +8,8 @@ python-dotenv = "*"
 django = "*"
 crispy-tailwind = "*"
 django-crispy-forms = "*"
+django-ckeditor = "*"
+pillow = "*"
 
 [dev-packages]
 autopep8 = "*"

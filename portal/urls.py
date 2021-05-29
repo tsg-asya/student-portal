@@ -7,13 +7,15 @@ from authy.views import signup, student, teacher
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('user/', include('authy.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', signup.SignUpView.as_view(), name='signup'),
     path('accounts/signup/student/',
          student.StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/',
-         teacher.TeacherSignUpView.as_view(), name='teacher_signup')
-]
+         teacher.TeacherSignUpView.as_view(), name='teacher_signup'),
+    path('ckeditor/', include('ckeditor_uploader.urls'))
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

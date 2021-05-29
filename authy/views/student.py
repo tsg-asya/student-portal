@@ -1,7 +1,9 @@
-from django.views.generic import CreateView
-from authy.models import User
-from authy.forms import StudentSignUpForm
+from django.views.generic import CreateView, UpdateView, DetailView
+from authy.models import Student, User
+from authy.forms import StudentSignUpForm, StudentUpdateForm
 from django.contrib.auth import login
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 
 
@@ -18,3 +20,20 @@ class StudentSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('/')
+
+
+class StudentUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "authy/student_update.html"
+    form_class = StudentUpdateForm
+
+    def get_queryset(self):
+        return Student.objects.filter(user=self.request.user)
+
+    def get_success_url(self):
+        return reverse("/")
+
+
+class StudentDetailView(LoginRequiredMixin, DetailView):
+    template_name = "authy/student_detail.html"
+    context_object_name = "student"
+    queryset = Student.objects.all()

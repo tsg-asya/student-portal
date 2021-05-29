@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% block lcontent %}
+<h1 class="flex-1 text-2xl font-bold">Home - Profile Update</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mt-10 sm:mt-0">
+            <div class="md:grid md:grid-cols-3 md:gap-6">
+              <div class="md:col-span-1">
+                <div class="px-4 sm:px-0">
+                  <h3 class="text-lg font-medium leading-6 text-gray-900">Student Information</h3>
+                  <div class="bg-white p-6 border-t-4 border-green-400">
+                      <img class="rounded"
+                      {% if student.picture %}
+                      src="{{ student.picture.url }}"
+                      {% else %}
+                      src="https://i.imgur.com/TBlrNyU.jpg"
+                      {% endif %}
+                      alt="member-photo">
+                    </div>
+                    <p class="mt-1 text-sm text-gray-600 mb-4">
+                      - Information should be true according to your Knowledge <br/>
+                      - Information is Public record. <br/>
+                      - Don't share any sensitive information
+                      </p>
+                </div>
+              </div>
+              <div class="mt-5 md:mt-0 md:col-span-2">
+                  <div class="shadow overflow-hidden sm:rounded-md">
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                      <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.enrollment_no|as_crispy_field }}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.contact|as_crispy_field }}
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.birthdate|as_crispy_field }}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.local_address|as_crispy_field }}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.city_state|as_crispy_field }}
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.picture|as_crispy_field }}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.guardian_name|as_crispy_field }}
+                        </div>
+                        <div class="col-span-6 sm:col-span-3">
+                            {{ form.guardian_contact_no|as_crispy_field }}
+                        </div>
+                      </div>
+                      <button class="w-auto bg-indigo-500 hover:bg-indigo-600 px-3 py-2 rounded-md text-white rounded" type="submit">Submit</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+{% endblock lcontent %}

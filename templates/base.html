@@ -14,10 +14,26 @@
 </style>
 <body>
     {% if not user.is_authenticated %}
-        {% include 'navbar.html' %}
-    {% endif %}
+        {% include 'n-navbar.html' %}
         {% block content %}
         {% endblock content %}
+    {% else %}
+    <div class="relative min-h-screen md:flex">
+        {% include 'navbar.html' %}
+        <div class="flex-1 p-10">
+            {% block lcontent %}
+            {% endblock lcontent %}
+        </div>
+        <script>
+            // grab everything we need
+            const btn = document.querySelector(".mobile-menu-button");
+            const sidebar = document.querySelector(".sidebar");
 
+            // add our event listener for the click
+            btn.addEventListener("click", () => {
+            sidebar.classList.toggle("-translate-x-full");
+            });
+        </script>
+    {% endif %}
 </body>
 </html>
