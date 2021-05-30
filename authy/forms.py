@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.utils.text import slugify
 from django.forms.utils import ValidationError
-from authy.models import User, Student
+from authy.models import User, Student, Degree_Batch
 
 # custom validators
 
@@ -36,6 +36,8 @@ class StudentSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(
         max_length=30, required=True, label='College Email')
+    degree_batch = forms.ModelChoiceField(
+        queryset=Degree_Batch.objects.all(), required=True, empty_label=None)
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -57,7 +59,10 @@ class StudentSignUpForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         user.save()
         student = Student.objects.create(
-            user=user, slug=slugify(user.username))
+            user=user,
+            slug=slugify(user.username),
+            degree_batch=self.cleaned_data['degree_batch']
+        )
         return user
 
 

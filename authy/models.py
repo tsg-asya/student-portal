@@ -23,6 +23,15 @@ def user_directory_path(instance, filename):
     return profile_pic_name
 
 
+class Degree_Batch(models.Model):
+    title = models.CharField(max_length=30, verbose_name='Title')
+    full_title = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.title
+
+
 GENDER = (
     ('Male', 'Male'),
     ('Female', 'Female'),
@@ -45,6 +54,8 @@ class Student(models.Model):
     birthdate = models.DateField(null=True, blank=True)
     picture = models.ImageField(
         upload_to=user_directory_path, blank=True, null=True)
+    degree_batch = models.ForeignKey(
+        Degree_Batch, related_name='degree_batch', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username + '-' + self.enrollment_no

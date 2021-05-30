@@ -5,9 +5,13 @@ from django.contrib.auth import login
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+from authy.decorators import student_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class StudentSignUpView(CreateView):
+class StudentSignUpView(UserPassesTestMixin, CreateView):
     model = User
     form_class = StudentSignUpForm
     template_name = 'registration/signup_form.html'
@@ -19,7 +23,10 @@ class StudentSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('/')
+        return redirect('index')
+
+    def test_func(self):
+        return not self.request.user.is_authenticated
 
 
 class StudentUpdateView(LoginRequiredMixin, UpdateView):
@@ -30,7 +37,7 @@ class StudentUpdateView(LoginRequiredMixin, UpdateView):
         return Student.objects.filter(user=self.request.user)
 
     def get_success_url(self):
-        return reverse("/")
+        return reverse("student_detail", args=(self.request.user.student.slug,))
 
 
 class StudentDetailView(LoginRequiredMixin, DetailView):

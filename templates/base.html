@@ -12,11 +12,17 @@
 </head>
 <style>
 </style>
-<body>
+<body >
     {% if not user.is_authenticated %}
+    <div class="flex flex-col h-screen">
+
         {% include 'n-navbar.html' %}
-        {% block content %}
-        {% endblock content %}
+        <main class="p-4 flex-grow">
+            {% block content %}
+            {% endblock content %}
+        </main>
+            {% include 'footer.html' %}
+    </div>
     {% else %}
     <div class="relative min-h-screen md:flex">
         {% include 'navbar.html' %}

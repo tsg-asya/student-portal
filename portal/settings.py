@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # local apps
     'authy',
+    'classroom',
 
     # third party
     'crispy_forms',

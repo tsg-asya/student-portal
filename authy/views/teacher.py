@@ -3,9 +3,10 @@ from authy.models import User
 from authy.forms import StudentSignUpForm, TeacherSignUpForm
 from django.contrib.auth import login
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class TeacherSignUpView(CreateView):
+class TeacherSignUpView(UserPassesTestMixin, CreateView):
     model = User
     form_class = TeacherSignUpForm
     template_name = 'registration/signup_form.html'
@@ -17,4 +18,7 @@ class TeacherSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('/')
+        return redirect('index')
+
+    def test_func(self):
+        return not self.request.user.is_authenticated
