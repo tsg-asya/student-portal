@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block lcontent %}
+{% if teacher_mode %}
+<header class="text-gray-600 body-font">
+      <a href="{% url 'course_update' course.id %} "><button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4">Update
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+      </button></a>
+      <a href="{% url 'course_delete' course.id %} "><button class="inline-flex items-center bg-red-600 border-0 py-1 px-3 focus:outline-none hover:bg-red-700 rounded text-white mt-4">Delete
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+      </button></a>
+    </div>
+  </header>
+{% endif %}
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-10 mx-auto">
+      <div class="flex flex-wrap -m-12">
+        <div class="p-12 md:w-100 flex flex-col items-start">
+          <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest">ID:{{ course.id }}</span>
+          <a class="inline-flex items-center">
+            <span class="flex-grow flex flex-col py-2">
+              <span class="title-font font-medium text-gray-900">By {{ course.user.first_name|capfirst }}</span>
+              <span class="text-gray-400 text-xs tracking-widest mt-0.5">{{ course.degree_batch }}</span>
+            </span>
+          </a>
+          <h2 class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mt-4">{{ course.title }}</h2>
+          <span class="text-gray-400 text-xs tracking-widest mt-0.5 mb-4">Created On {{ course.created_at|date:"M d, Y"  }} <i class="ml-2 text-red-400">Updated On {{ course.updated_at }}</i></span>
+          <p class="leading-relaxed mb-8">Course Description - {{ course.description }}.</p>
+          <h2 class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mb-4">Syllabus</h2>
+          <p>{{ course.syllabus|safe }}</p>
+        </div>
+    </div>
+    </div>
+  </section>
+{% endblock lcontent %}

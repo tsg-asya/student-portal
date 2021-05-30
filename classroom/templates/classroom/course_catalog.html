@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} Courses {% endblock %}
+
+{% block lcontent %}
+<h1 class="flex-1 text-2xl py-3 font-bold">Courses in {{ degree_batch.full_title|capfirst }}</h1>
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap -mx-4 -my-8">
+          {% for course in courses %}
+        <div class="py-8 px-4 border-gray-200 shadow-inner lg:w-1/3">
+          <div class="h-full flex items-start">
+            <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
+              <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">{{ course.created_at|date:"M" }}</span>
+              <span class="font-medium text-lg text-gray-800 title-font leading-none">{{ course.created_at|date:"d" }}</span>
+            </div>
+            <div class="flex-grow pl-6">
+              <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">{{ degree_batch }}</h2>
+              <h1 class="title-font text-xl font-medium text-gray-900 mb-3"><a href="{% url 'course_detail' course.id %}">{{ course.title }}</a></h1>
+              <p class="leading-relaxed mb-5">{{ course.description }}</p>
+              <a class="inline-flex items-center">
+                <span class="flex-grow flex flex-col">
+                  <span class="title-font font-medium text-gray-900">By {{ course.user.first_name|capfirst }}</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endblock lcontent %}
