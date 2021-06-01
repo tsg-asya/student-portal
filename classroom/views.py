@@ -48,7 +48,7 @@ def UpdateCourse(request, course_id):
                 course.degree_batch = form.cleaned_data.get('degree_batch')
                 course.syllabus = form.cleaned_data.get('syllabus')
                 course.save()
-                return redirect('index')
+                return HttpResponseRedirect(reverse("course_detail", kwargs={'course_id': course.id}))
         else:
             form = NewCourseForm(instance=course)
 

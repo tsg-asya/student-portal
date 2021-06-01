@@ -2,6 +2,8 @@
 {% load static %}
 {% load tailwind_filters %}
 
+{% block title %} - Update Course {% endblock %}
+
 {% block lcontent %}
 <h1 class="flex-1 text-2xl py-3 font-bold">Update Course "{{ course.title }}"</h1>
 <form method="POST" enctype="multipart/form-data">
