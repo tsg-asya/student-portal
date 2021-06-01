@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load tailwind_filters %}
+
+{% block title %} - Profile {% endblock title %}
+
 {% block lcontent %}
 <h1 class="flex-1 text-2xl font-bold">Home - Profile</h1>
 <div class="container mx-auto my-5 p-5">
@@ -19,7 +22,7 @@
                         alt="member-photo">
                     {% endif %}
                 </div>
-                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ student.user.first_name|capfirst }} {{ student.user.last_name|capfirst }}</h1>
+                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ student.user.first_name|capfirst }}</h1>
                 <h3 class="text-gray-600 font-lg text-semibold leading-6">Enrollment Number</h3>
                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{{ student.enrollment_no }}</p>
                 <ul
@@ -51,7 +54,7 @@
                         </div>
                         <div class="grid grid-cols-2">
                             <div class="px-4 py-2 font-semibold">Last Name</div>
-                            <div class="px-4 py-2">Rsdds</div>
+                            <div class="px-4 py-2">{{ student.user.last_name|capfirst }}</div>
                         </div>
                         <div class="grid grid-cols-2">
                             <div class="px-4 py-2 font-semibold">Gender</div>
@@ -72,18 +75,24 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-2">
-                            <div class="px-4 py-2 font-semibold">DOB</div>
+                            <div class="px-4 py-2 font-semibold">D.O.B</div>
                             <div class="px-4 py-2">{{ student.birthdate }}</div>
                         </div>
                         <div class="grid grid-cols-2">
                             <div class="px-4 py-2 font-semibold">Age</div>
-                            <div class="px-4 py-2">dfgdfg</div>
+                            <div class="px-4 py-2">{{ student.calculate_age }}</div>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <div class="px-4 py-2 font-semibold">Guardian's Name</div>
+                            <div class="px-4 py-2">{{ student.guardian_name }}</div>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <div class="px-4 py-2 font-semibold">Guardian's Number</div>
+                            <div class="px-4 py-2">+91 {{ student.guardian_contact_no }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-center">
-                    <button
-                        class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"><a href="#">Delete</a></button>
                     <button
                         class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"><a href="{% url 'student_update' student.slug  %}">Update</a></button>
                 </div>

@@ -34,6 +34,7 @@ def UniqueUser(value):
 
 class StudentSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
+    last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(
         max_length=30, required=True, label='College Email')
     degree_batch = forms.ModelChoiceField(
@@ -42,7 +43,7 @@ class StudentSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
 
-    field_order = ['first_name', 'username', 'email']
+    field_order = ['first_name', 'last_name', 'username', 'email']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,6 +57,7 @@ class StudentSignUpForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_student = True
         user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
         user.email = self.cleaned_data["email"]
         user.save()
         student = Student.objects.create(

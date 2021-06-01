@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from datetime import datetime
+from datetime import date
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
@@ -8,7 +8,7 @@ import os
 
 
 class User(AbstractUser):
-    is_student = models.BooleanField(default=True)
+    is_student = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
 
     def __str__(self) -> str:
@@ -61,6 +61,10 @@ class Student(models.Model):
 
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username + '-' + self.enrollment_no
+
+    def calculate_age(self):
+        today = date.today()
+        return today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
 
 
 # signals

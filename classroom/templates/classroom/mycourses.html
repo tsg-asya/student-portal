@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %} - Courses {% endblock %}
+{% block title %} - MyCourses {% endblock %}
 
 {% block lcontent %}
-<h1 class="flex-1 text-2xl py-3 font-bold">Courses in {{ degree_batch.full_title|capfirst }}</h1>
+<h1 class="flex-1 text-2xl py-3 font-bold">Courses for '{{ username }}'</h1>
 <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-wrap -mx-4 -my-8">
@@ -16,7 +16,7 @@
             </div>
             <div class="flex-grow pl-6">
               <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">{{ course.degree_batch }}</h2>
-              <h1 class="title-font text-xl font-medium text-gray-900 mb-3"><a href="{% url 'course_detail' course.id %}" class="hover:underline">{{ course.title }}</a></h1>
+              <h1 class="title-font text-xl font-medium text-gray-900 mb-3"><a href="{% url 'course_detail' course.id %}" class=" hover:underline">{{ course.title }}</a></h1>
               <p class="leading-relaxed mb-5">{{ course.description }}</p>
               <a class="inline-flex items-center">
                 <span class="flex-grow flex flex-col">

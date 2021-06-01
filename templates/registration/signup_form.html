@@ -3,7 +3,9 @@
 
 {% block title %}- SignUp {{ user_type|title }}{% endblock title %}
 
+
 {% block content %}
+{% if user_type == 'teacher' %}
 <div class="max-w-lg mx-auto">
     <h2 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Sign up as a {{ user_type|title }}</h2>
     <form method="POST">
@@ -16,4 +18,44 @@
         <a class="hover:text-indigo-500 mt-3" href="{% url 'password_reset' %}">Forgot Password?</a>
     </div>
 </div>
+{% else %}
+<div class="max-w-lg mx-auto">
+    <h2 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Sign up as a {{ user_type|title }}</h2>
+    <form class="w-full max-w-lg" method="POST">
+        {% csrf_token %}
+        <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            {{ form.first_name|as_crispy_field }}
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+            {{ form.last_name|as_crispy_field }}
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            {{ form.username|as_crispy_field }}
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+            {{ form.degree_batch|as_crispy_field }}
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="w-full px-3">
+            {{ form.email|as_crispy_field }}
+          </div>
+          <div class="w-full px-3">
+            {{ form.password1|as_crispy_field }}
+          </div>
+          <div class="w-full px-3">
+            {{ form.password2|as_crispy_field }}
+          </div>
+        </div>
+        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">Sign Up</button>
+    </form>
+    <div class="flex py-5 border-t border-gray-200 mt-5 justify-between">
+        <a class="hover:text-indigo-500 mt-3" href="{% url 'password_reset' %}">Forgot Password?</a>
+    </div>
+</div>
+{% endif %}
+
 {% endblock content %}

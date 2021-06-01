@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 import uuid
 from authy.models import User, Degree_Batch
 

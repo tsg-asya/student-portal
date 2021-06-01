@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView, DetailView
 from authy.models import Student, User
 from authy.forms import StudentSignUpForm, StudentUpdateForm
@@ -23,7 +24,7 @@ class StudentSignUpView(UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('index')
+        return HttpResponseRedirect(reverse('student_update', kwargs={'slug': self.request.user.student.slug}))
 
     def test_func(self):
         return not self.request.user.is_authenticated
