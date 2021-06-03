@@ -1,8 +1,8 @@
 from django.views.generic import CreateView
 from authy.models import User
-from authy.forms import StudentSignUpForm, TeacherSignUpForm
+from authy.forms import TeacherSignUpForm
 from django.contrib.auth import login
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 

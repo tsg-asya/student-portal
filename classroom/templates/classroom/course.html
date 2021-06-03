@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}- {{ course.title }} {%endblock title  %}
+
 {% block lcontent %}
 {% if teacher_mode %}
 <header class="text-gray-600 body-font">
@@ -26,16 +28,17 @@
     <div class="container px-5 py-10 mx-auto">
       <div class="flex flex-wrap -m-12">
         <div class="p-12 md:w-100 flex flex-col items-start">
-          <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest">ID:{{ course.id }}
-              {% if user_exist_in_course %}
-              <button class="ml-4 bg-red-500 text-white p-2 rounded"><a href="{% url 'course_enroll' course.id %}">Unenroll</a></button>
-              {% else %}
-              <button class="ml-4 bg-green-500 text-white p-2 rounded"><a href="{% url 'course_enroll' course.id %}">Enroll</a></button>
+          <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest">ID:{{ course.id }}  {% if not teacher_mode %}
+                {% if user_exist_in_course %}
+                <button class="ml-4 bg-red-500 text-white p-2 rounded"><a href="{% url 'course_enroll' course.id %}">Unenroll</a></button>
+                {% else %}
+                <button class="ml-4 bg-green-500 text-white p-2 rounded"><a href="{% url 'course_enroll' course.id %}">Enroll</a></button>
+                {% endif %}
               {% endif %}
             </span>
           <a class="inline-flex items-center">
             <span class="flex-grow flex flex-col py-2">
-              <span class="title-font font-medium text-gray-900">By {{ course.user.first_name|capfirst }}</span>
+              <span class="title-font font-medium text-gray-900">By {{ course.user.username|capfirst }}</span>
               <span class="text-gray-400 text-xs tracking-widest mt-0.5">{{ course.degree_batch }}</span>
             </span>
           </a>

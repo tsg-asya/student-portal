@@ -4,11 +4,7 @@ from authy.models import Student, User
 from authy.forms import StudentSignUpForm, StudentUpdateForm
 from django.contrib.auth import login
 from django.urls import reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
-from authy.decorators import student_required
-from django.utils.decorators import method_decorator
+from authy.mixins import StudentLoginMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
@@ -30,7 +26,7 @@ class StudentSignUpView(UserPassesTestMixin, CreateView):
         return not self.request.user.is_authenticated
 
 
-class StudentUpdateView(LoginRequiredMixin, UpdateView):
+class StudentUpdateView(StudentLoginMixin, UpdateView):
     template_name = "authy/student_update.html"
     form_class = StudentUpdateForm
 
@@ -41,7 +37,7 @@ class StudentUpdateView(LoginRequiredMixin, UpdateView):
         return reverse("student_detail", args=(self.request.user.student.slug,))
 
 
-class StudentDetailView(LoginRequiredMixin, DetailView):
+class StudentDetailView(StudentLoginMixin, DetailView):
     template_name = "authy/student_detail.html"
     context_object_name = "student"
     queryset = Student.objects.all()

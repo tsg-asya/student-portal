@@ -18,7 +18,7 @@ class LandingPage(TemplateView):
     template_name = 'index.html'
 
 
-class CourseCreateView(StudentLoginMixin, CreateView):
+class CourseCreateView(TeacherLoginMixin, CreateView):
     template_name = "classroom/course_create.html"
     form_class = NewCourseForm
 
@@ -32,6 +32,8 @@ class CourseCreateView(StudentLoginMixin, CreateView):
         return super().form_valid(form)
 
 
+@teacher_required
+@login_required
 def UpdateCourse(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
@@ -60,6 +62,7 @@ def UpdateCourse(request, course_id):
     return render(request, 'classroom/course_update.html', context)
 
 
+@login_required
 def CourseDetail(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
@@ -79,6 +82,8 @@ def CourseDetail(request, course_id):
     return render(request, 'classroom/course.html', context)
 
 
+@teacher_required
+@login_required
 def DeleteCourse(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
@@ -100,6 +105,7 @@ def Catalog(request, degree_slug):
     return render(request, "classroom/course_catalog.html", context)
 
 
+@student_required
 @login_required
 def Enroll(request, course_id):
     user = request.user

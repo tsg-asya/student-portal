@@ -153,6 +153,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # 3rd party apps:
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 # for production
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
