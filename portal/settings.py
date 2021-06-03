@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'authy',
     'classroom',
     'notice',
+    'quiz'
 
     # third party
     'crispy_forms',
