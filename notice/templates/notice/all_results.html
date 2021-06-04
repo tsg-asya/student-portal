@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} - Results {% endblock title %}
+
+{% block lcontent %}
+<h1 class="flex-1 text-2xl py-3 font-bold"><a href="{% url 'all_notices' %}" class="underline text-blue-500 hover:text-blue-700">Notices</a> | Results </h1>
+<table class="table-fixed rounded">
+    <thead class="border-b-4 border-black">
+      <tr>
+        <th class="w-1/9 font-bold p-3">S.No</th>
+        <th class="w-1/2 font-bold p-3">Title</th>
+        <th class="w-1/4">Link</th>
+        <th class="w-1/4">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for result in results %}
+      <tr class="border-2 border-gray-200">
+        <td class="w-1/9 p-3 text-center break-words">{{ forloop.counter }}</td>
+        <td class="w-1/2 p-3 text-center font-semibold break-words">{{ result.title|capfirst }}</td>
+        <td class="w-1/4 text-center"><a href="{{ result.file.url }}" class="underline text-blue-500 hover:text-blue-700">Download</a></td>
+        <td class="w-1/4 text-center">{{ result.added_on|date:"M d, Y" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock lcontent %}

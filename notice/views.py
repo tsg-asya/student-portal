@@ -1,10 +1,15 @@
-from django.shortcuts import render
 from django.views.generic import ListView
-from .models import Notice
+from .models import Notice, Result
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class AllNotices(LoginRequiredMixin, ListView):
+class ListNotices(LoginRequiredMixin, ListView):
     template_name = "notice/all_notes.html"
-    queryset = Notice.objects.all()
+    queryset = Notice.objects.order_by('-added_on')
     context_object_name = "notices"
+
+
+class ListResults(LoginRequiredMixin, ListView):
+    template_name = "notice/all_results.html"
+    queryset = Result.objects.order_by('-added_on')
+    context_object_name = "results"
