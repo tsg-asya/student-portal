@@ -3,7 +3,8 @@
 {% block title %} - Quizzes {% endblock title %}
 
 {% block lcontent %}
-<h1 class="flex-1 text-2xl py-3 font-bold">My Quizzes - Max(20)</h1>
+<h1 class="flex-1 text-2xl py-3 font-bold">My Quizzes </h1>
+<a href="{% url 'teachers:quiz_add' %}" class="w-24 bg-indigo-500 hover:bg-indigo-600 px-3 py-2 mt-2 rounded-md text-white">Create Quiz</a>
 <table class="table-fixed rounded">
     <thead class="border-b-4 border-black">
       <tr>

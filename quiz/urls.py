@@ -4,6 +4,8 @@ from quiz.views import student, teacher
 urlpatterns = [
     path('students/', include(([
         path('', student.QuizListView.as_view(), name='quiz_list'),
+        path('taken/', student.TakenQuizListView.as_view(), name='taken_quiz_list'),
+        path('quiz/<int:pk>/', student.take_quiz, name='take_quiz'),
     ], 'quiz'), namespace='students')),
 
     path('teachers/', include(([

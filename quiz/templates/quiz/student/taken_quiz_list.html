@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} - Taken Quizzes {% endblock title %}
+
+{% block lcontent %}
+<h1 class="flex-1 text-2xl py-3 font-bold">Quizzes</h1>
+<h2 class="flex-1 text-xl py-3 font-bold"><a href="{% url 'students:quiz_list' %}" class="underline text-blue-500 hover:text-blue-700">New</a> | Taken</h2>
+<table class="table-fixed rounded">
+    <thead class="border-b-4 border-black">
+      <tr>
+        <th class="w-1/2 font-bold p-3">Quiz</th>
+        <th class="w-1/5 font-bold p-3">Creator</th>
+        <th class="w-1/5 font-bold p-3">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for taken_quiz in taken_quizzes %}
+      <tr class="border-2 border-gray-200">
+        <td class="w-1/2 p-3 text-center font-semibold break-words">{{ taken_quiz.quiz.name }}</td>
+        <td class="w-1/5 p-3 text-center font-semibold break-words">{{ taken_quiz.quiz.owner }}</td>
+        <td class="w-1/5 p-3 text-center break-words">{{ taken_quiz.score }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock lcontent %}
