@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% block title %} - Question Update {% endblock title %}
+
+{% block lcontent %}
+<div class="max-w-6xl mx-auto">
+<h1 class="text-xl font-semibold text-gray-800 mx-auto pb-2"><a href="{% url 'teachers:quiz_change' quiz.id %}" class="underline text-blue-500 hover:text-blue-700">{{ quiz.name }}</a> / {{ question.text }}</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {{ form|crispy }}
+    <section class="bg-gray-100 body-font">
+        <div class="container grid grid-cols-4 gap-4 p-2 mx-auto rounded">
+            <div class="col-span-2 p-1">
+                <strong>Answers</strong>
+              </div>
+            <div class="p-1">
+                <strong>Correct?</strong>
+              </div>
+            <div class="p-1">
+                <strong>Delete?</strong>
+              </div>
+
+        {% for error in formset.non_form_errors %}
+
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative col-span-4" role="alert" id="non-form-alert">
+            <span class="block sm:inline">{{ error }}</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg onclick="removeAlert()" class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+            </span>
+            </div>
+        {% endfor %}
+        {% for form in formset %}
+            <div class="col-span-2 p-1">
+                {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                {{ form.text|as_crispy_field }}
+                {% if form.instance.pk and form.text.value != form.instance.text %}<p class="mb-0 mt-1"><small class="text-muted font-italic"><strong>Old answer:</strong> {{ form.instance.text }}</small></p>{% endif %}
+            </div>
+            <div class="p-1 ml-4">
+                {{ form.is_correct }}
+            </div>
+            <div class="p-1 ml-4">
+                {% if form.instance.pk %}
+                  {{ form.DELETE }}
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+    <p>
+      <small class="form-text text-muted">Your question may have at least <strong>2</strong> answers and maximum <strong>10</strong> answers. Select at least one correct answer.</small>
+    </p>
+    <button type="submit" class="w-30 bg-green-500 hover:bg-green-600 p-2 mt-2 rounded-md text-white">Save changes</button>
+    <a href="{% url 'teachers:quiz_change' quiz.pk %}" class="w-30 bg-gray-500 hover:bg-gray-600 p-2 rounded-md text-white" role="button">Nevermind</a>
+    <a href="{% url 'teachers:question_delete' quiz.pk question.pk %}" class="w-30 bg-red-500 hover:bg-red-600 p-2 rounded-md text-white float-right">Delete</a>
+  </form>
+  </div>
+
+  <script>
+      let nonFormAlert = document.getElementById('non-form-alert')
+      function removeAlert() {
+        nonFormAlert.remove()
+      }
+  </script>
+{% endblock lcontent %}

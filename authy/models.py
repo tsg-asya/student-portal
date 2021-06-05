@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from datetime import date
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.conf import settings
 import os
 
@@ -40,6 +38,36 @@ GENDER = (
 )
 
 
+class Quiz(models.Model):
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='quizzes')
+    name = models.CharField(max_length=255)
+    subject = models.ForeignKey(
+        Degree_Batch, on_delete=models.CASCADE, related_name='quizzes')
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Question(models.Model):
+    quiz = models.ForeignKey(
+        Quiz, on_delete=models.CASCADE, related_name='questions')
+    text = models.CharField('Question', max_length=255)
+
+    def __str__(self):
+        return self.text
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name='answers')
+    text = models.CharField('Answer', max_length=255)
+    is_correct = models.BooleanField('Correct answer', default=False)
+
+    def __str__(self):
+        return self.text
+
+
 class Student(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student')
@@ -58,6 +86,7 @@ class Student(models.Model):
         upload_to=user_directory_path, blank=True, null=True)
     degree_batch = models.ForeignKey(
         Degree_Batch, related_name='degree_batch', on_delete=models.SET_NULL, null=True)
+    quizzes = models.ManyToManyField(Quiz, through='TakenQuiz')
 
     def __str__(self):  # __unicode__ for Python 2
         return self.user.username + '-' + self.enrollment_no
@@ -65,6 +94,22 @@ class Student(models.Model):
     def calculate_age(self):
         today = date.today()
         return today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
+
+
+class TakenQuiz(models.Model):
+    student = models.ForeignKey(
+        Student, on_delete=models.CASCADE, related_name='taken_quizzes')
+    quiz = models.ForeignKey(
+        Quiz, on_delete=models.CASCADE, related_name='taken_quizzes')
+    score = models.FloatField()
+    date = models.DateTimeField(auto_now_add=True)
+
+
+class StudentAnswer(models.Model):
+    student = models.ForeignKey(
+        Student, on_delete=models.CASCADE, related_name='quiz_answers')
+    answer = models.ForeignKey(
+        Answer, on_delete=models.CASCADE, related_name='+')
 
 
 # signals

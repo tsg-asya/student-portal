@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} - Quizzes {% endblock title %}
+
+{% block lcontent %}
+<h1 class="flex-1 text-2xl py-3 font-bold">Quizzes</h1>
+<table class="table-fixed rounded">
+    <thead class="border-b-4 border-black">
+      <tr>
+        <th class="w-1/2 font-bold p-3">Title</th>
+        <th class="w-1/5 font-bold p-3">Questions</th>
+        <th class="w-1/5 font-bold p-2">Take</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for quiz in quizzes %}
+      <tr class="border-2 border-gray-200">
+        <td class="w-1/2 p-3 text-center font-semibold break-words">{{ quiz.name }}</td>
+        <td class="w-1/5 p-3 text-center break-words">{{ quiz.questions_count }}</td>
+        <td class="w-1/5 p-2 text-center"><a href="#" class="underline text-blue-500 hover:text-blue-700">Start</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock lcontent %}

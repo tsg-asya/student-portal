@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block title %} - Q-Delete? {% endblock title %}
+
+{% block lcontent %}
+
+    <div class="max-w-lg mx-auto">
+            <h2 class="text-xl font-medium font-mono">Are you sure you want to delete the question <i>'{{ object.text }}'</i> ?</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.crispy }}
+            <button class="w-1/4 mt-3 ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded" type="submit">Delete</button>
+        </form>
+
+        <div class="mt-5 py-5 border-t border-gray-200">
+            <a href="{% url 'teachers:quiz_change' quiz.pk %}" class="hover:text-red-500 mt-3">Back to Quiz List ?</a>
+        </div>
+    </div>
+{% endblock lcontent %}
