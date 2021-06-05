@@ -24,7 +24,7 @@
         <td class="w-1/6 p-2 text-center"><a href="#">{{ quiz.questions_count }}</a></td>
         <td class="w-1/6 p-2 text-center"><a href="#">{{ quiz.taken_count  }}</a></td>
         <td class="w-1/5 p-2 text-center"><a href="{% url 'teachers:quiz_change' quiz.pk %}" class="underline text-blue-500 hover:text-blue-700">Update</a></td>
-        <td class="w-1/5 p-2 text-center"><a href="{% url 'teachers:quiz_change' quiz.pk %}" class="underline text-blue-500 hover:text-blue-700">View</a></td>
+        <td class="w-1/5 p-2 text-center"><a href="{% url 'teachers:quiz_results' quiz.pk %}" class="underline text-blue-500 hover:text-blue-700">View</a></td>
       </tr>
       {% endfor %}
     </tbody>

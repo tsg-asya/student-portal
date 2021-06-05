@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %} - Test:{{ quiz.id }} Results {% endblock title %}
+
+{% block lcontent %}
+<h1 class="flex-1 text-2xl py-3 font-bold">{{ quiz.name }} Results</h1>
+<h3 class="text-xl p-2 font-semibold">Total respondents: {{ total_taken_quizzes }}</h3>
+<h3 class="text-xl p-1 font-semibold">Average Score: {{ quiz_score.average_score|default_if_none:0.0 }}</h3>
+<table>
+    <thead class="border-b-4 border-black">
+      <tr>
+        <th class="w-1/3 font-bold p-3">Student</th>
+        <th class="w-1/5 font-bold p-3">Date</th>
+        <th class="w-1/6 font-bold p-2">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for taken_quiz in taken_quizzes %}
+      <tr class="border-2 border-gray-200">
+        <td class="w-1/3 p-3 text-center font-semibold break-words">{{ taken_quiz.student.user.username }}</td>
+        <td class="w-1/5 p-3 text-center break-words">{{ taken_quiz.date|naturaltime }}</td>
+        <td class="w-1/6 p-2 text-center"><a href="#">{{ taken_quiz.score }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock lcontent %}
