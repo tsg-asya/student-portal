@@ -4,6 +4,7 @@
 .venv
 .vscode
 .env
+todo.txt
 
 ### Django ###
 *.log

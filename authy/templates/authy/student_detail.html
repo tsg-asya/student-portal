@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load tailwind_filters %}
+{% load static %}
 
 {% block title %} - Profile {% endblock title %}
 
@@ -18,7 +19,7 @@
                         alt="member-photo">
                     {% else %}
                     <img class="h-auto w-full mx-auto"
-                        src="/media/default.jpg"
+                        src="{% static 'img/no-profile.png' %}"
                         alt="member-photo">
                     {% endif %}
                 </div>
