@@ -10,6 +10,7 @@ crispy-tailwind = "*"
 django-crispy-forms = "*"
 django-ckeditor = "*"
 pillow = "*"
+django-jet-reboot = "*"
 
 [dev-packages]
 autopep8 = "*"

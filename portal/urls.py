@@ -6,8 +6,13 @@ from authy.views import signup, student, teacher
 from django.contrib.auth.views import LoginView
 from classroom.views import LandingPage
 
+admin.site.site_header = 'IIT Dwarka Portal Admin'
+admin.site.index_title = 'Portal Admin'
+admin.site.site_title = 'IIT Dwarka'
+
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
     path('user/', include('authy.urls')),
     path('', LandingPage.as_view(), name='index'),
@@ -24,6 +29,7 @@ urlpatterns = [
     path('quiz/', include('quiz.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls'))
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
