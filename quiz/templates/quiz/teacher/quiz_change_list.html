@@ -29,4 +29,25 @@
       {% endfor %}
     </tbody>
   </table>
+  <div class="bg-white px-2 py-3 flex items-center justify-between border-t border-gray-200 sm:px-2">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Last &raquo;</a>
+        {% endif %}
+
+        <p class="text-sm text-gray-700 pt-2">
+            Showing
+            <span class="font-medium">{{ page_obj.number }}</span>
+            of
+            <span class="font-medium">{{ page_obj.paginator.num_pages }}</span>
+            Pages
+          </p>
+    </span>
+  </div>
 {% endblock lcontent %}

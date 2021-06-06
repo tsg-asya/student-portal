@@ -21,6 +21,7 @@ class QuizListView(TeacherLoginMixin, ListView):
     ordering = ('name', )
     context_object_name = 'quizzes'
     template_name = 'quiz/teacher/quiz_change_list.html'
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = self.request.user.quizzes \

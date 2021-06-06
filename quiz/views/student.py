@@ -19,6 +19,7 @@ class QuizListView(StudentLoginMixin, ListView):
     ordering = ('name', )
     context_object_name = 'quizzes'
     template_name = 'quiz/student/quiz_list.html'
+    paginate_by = 10
 
     def get_queryset(self):
         student = self.request.user.student
@@ -78,7 +79,9 @@ def take_quiz(request, pk):
 class TakenQuizListView(StudentLoginMixin, ListView):
     model = TakenQuiz
     context_object_name = 'taken_quizzes'
+    ordering = ('-date')
     template_name = 'quiz/student/taken_quiz_list.html'
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = self.request.user.student.taken_quizzes \
