@@ -86,6 +86,8 @@ class Student(models.Model):
         upload_to=user_directory_path, blank=True, null=True)
     degree_batch = models.ForeignKey(
         Degree_Batch, related_name='degree_batch', on_delete=models.SET_NULL, null=True)
+
+    # intermediate model to govern manytomany relationship for quizzes and students through 'TakenQuiz'
     quizzes = models.ManyToManyField(Quiz, through='TakenQuiz')
 
     def __str__(self):  # __unicode__ for Python 2

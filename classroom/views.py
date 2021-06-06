@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponse, request, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic.edit import DeleteView
-from authy.mixins import StudentLoginMixin, TeacherLoginMixin
+from authy.mixins import TeacherLoginMixin
 from django.views.generic import TemplateView, CreateView, UpdateView
 from .models import Course
 from .forms import NewCourseForm
@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from authy.decorators import student_required, teacher_required
-from authy.models import Degree_Batch, Student
+from authy.models import Degree_Batch
 
 
 class LandingPage(TemplateView):
@@ -95,9 +95,12 @@ def DeleteCourse(request, course_id):
     return redirect('index')
 
 
+@student_required
+@login_required
 def Catalog(request, degree_slug):
     degree_batch = get_object_or_404(Degree_Batch, slug=degree_slug)
-    courses = Course.objects.filter(degree_batch=degree_batch)
+    courses = Course.objects.filter(
+        degree_batch=degree_batch).order_by('-created_at')
     context = {
         'degree_batch': degree_batch,
         'courses': courses
@@ -122,7 +125,6 @@ def Enroll(request, course_id):
 def MyCourses(request):
     user = request.user
     courses = Course.objects.filter(Q(user=user) | Q(enrolled=user)).distinct()
-
     context = {
         'username': user.username,
         'courses': courses
