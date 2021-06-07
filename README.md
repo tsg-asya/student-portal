@@ -1,7 +1,3 @@
-## Important
-
-- The project isn't ready yet and doesn't approve of using the code until a license is uploaded.
-
 <p align="center"><img src="logo.jpg" height="140" alt="logo"/></p>
 <h1 align="center">Student Portal 📚</h1>
 <p align="center">Unofficial Student Portal for University until Approved!</p>
@@ -101,8 +97,11 @@ Admin endpoint is at http://127.0.0.1:8000/admin/
 
 ## Important
 
-This is a part of a **project for my university** and is still **in development**. The documentation isn't complete and the app requires some touchups before deployment.
+This is a part of a **project for my university** and is still **in development** and the README isn't complete yet.
 
-- The README isn't complete yet
+## 📄 License
+
+This project is licensed under the GPL3 License - see the [LICENSE.md](./LICENSE) file for details
+
 
 #### Designed & Developed with 💙 by [Animesh Singh](https://www.github.com/AnimeshRy)
