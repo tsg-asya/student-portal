@@ -6,11 +6,13 @@
 <a href="https://img.shields.io/github/issues/tsg-asya/portal-backend"><img alt="GitHub issues" src="https://img.shields.io/github/issues/tsg-asya/portal-backend"></a>
 <a href="https://img.shields.io/github/issues/tsg-asya/portal-backend/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/tsg-asya/portal-backend"></a>
 
+![Website Image](./showcase.PNG)
+
 ## ⚡ Features
 
-🎯 **Multiple User Authentication** - Access to Create a Teacher and a Student Account
+🎯 **Multiple User Authentication** - Start with either a Teacher or a Student Account
 
-🎯 **Course Creation and Enrollment** - Teacher's Create Courses and Student Enroll, there's more too
+🎯 **Course Creation and Enrollment** - Teacher's Create Courses and Student Enroll and are able to access information
 
 🎯 **Notices/Results Creation** - Seperate Staff only access to CRUD Notices and Results
 
@@ -97,7 +99,7 @@ Admin endpoint is at http://127.0.0.1:8000/admin/
 
 ## Important
 
-This is a part of a **project for my university** and is still **in development** and the README isn't complete yet.
+The Readme is a work in progress, although the app is deployed.
 
 ## 📄 License
 
