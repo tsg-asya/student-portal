@@ -6,9 +6,9 @@ from authy.views import signup, student, teacher
 from django.contrib.auth.views import LoginView
 from classroom.views import LandingPage
 
-admin.site.site_header = 'IIT Dwarka Portal Admin'
+admin.site.site_header = 'Student Portal Admin'
 admin.site.index_title = 'Portal Admin'
-admin.site.site_title = 'IIT Dwarka'
+admin.site.site_title = 'School Name'
 
 
 urlpatterns = [
