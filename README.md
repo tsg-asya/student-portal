@@ -1,6 +1,6 @@
 <p align="center"><img src="logo.jpg" height="140" alt="logo"/></p>
 <h1 align="center">Student Portal 📚</h1>
-<p align="center">Unofficial Student Portal for University until Approved!</p>
+<p align="center">Open Source Student Portal for Small Institutions!</p>
 <p align="center">
 <img alt="GitHub Pipenv locked Python version" src="https://img.shields.io/github/pipenv/locked/python-version/AnimeshRy/gymrocket">
 <a href="https://img.shields.io/github/issues/tsg-asya/portal-backend"><img alt="GitHub issues" src="https://img.shields.io/github/issues/tsg-asya/portal-backend"></a>
@@ -17,6 +17,10 @@
 🎯 **Notices/Results Creation** - Seperate Staff only access to CRUD Notices and Results
 
 🎯 **Quizzes** - Teacher's Create Multiple Choice Quizzes and Students can take them
+  
+🎯 **Clean Tailwind UI** - Responsive design made from Tailwind CSS
+  
+🎯 **Better Admin Interface** - Staff and Admin are utilized the old Django Jet Admin rebooted for Django 3 
 
 > Many more features that you can explore yourself
 
